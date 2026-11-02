@@ -1,0 +1,318 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>תוכנית תרגילי הגב</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: an exercise sheet — six cards in sheet order, each = drawing, steps, dosage you fill in, sources */
+:root{
+  --bg:#f4f7f5; --card:#ffffff; --ink:#1d2a27; --muted:#5b6b67; --line:#d9e2de;
+  --figure:#24413b; --ghost:#a9bab5; --move:#d0573a; --accent:#1f7a6d; --accent-soft:#e3f1ee; --floor:#c9d5d1;
+  --display:"Rubik","Assistant",system-ui,sans-serif;
+  --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121816; --card:#1a2220; --ink:#e6eeeb; --muted:#9fb0ab; --line:#2c3835;
+  --figure:#d7e6e1; --ghost:#55655f; --move:#f08566; --accent:#5cc2b0; --accent-soft:#1f3330; --floor:#3a4844; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121816; --card:#1a2220; --ink:#e6eeeb; --muted:#9fb0ab; --line:#2c3835;
+  --figure:#d7e6e1; --ghost:#55655f; --move:#f08566; --accent:#5cc2b0; --accent-soft:#1f3330; --floor:#3a4844; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;direction:rtl}
+.wrap{max-width:1080px;margin:0 auto;padding-block:28px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:grid;gap:10px;margin-bottom:22px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.2;margin:0;text-wrap:balance}
+.lede{color:var(--muted);margin:0;max-width:68ch}
+.note{background:var(--accent-soft);border-radius:10px;padding:12px 16px;max-width:76ch;font-size:.95rem}
+.note strong{color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,470px),1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:14px;align-content:start;min-width:0}
+.head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.num{font-family:var(--display);font-weight:700;color:var(--accent);font-size:1.05rem;font-variant-numeric:tabular-nums}
+h2{font-family:var(--display);font-weight:500;font-size:1.3rem;margin:0;line-height:1.3}
+.alias{color:var(--muted);font-size:.9rem;direction:ltr;unicode-bidi:isolate}
+figure{margin:0;background:var(--bg);border-radius:10px;padding:8px}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+.fig-key{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);padding:4px 6px 0}
+.fig-key span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:18px;height:0;border-top:3px solid var(--figure);display:inline-block}
+.sw.g{border-top:3px dashed var(--ghost)}
+.sw.m{border-top-color:var(--move)}
+ol{margin:0;padding-inline-start:1.3em;display:grid;gap:4px}
+ol li::marker{color:var(--accent);font-weight:700}
+.dose{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:10px 0}
+.dose label{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+.dose input{width:4.2em;font:inherit;font-variant-numeric:tabular-nums;text-align:center;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.dose input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.tip{font-size:.92rem;color:var(--muted);margin:0}
+.tip b{color:var(--ink)}
+.src{display:grid;gap:6px;font-size:.92rem}
+.src h3{font-family:var(--body);font-size:.78rem;letter-spacing:.06em;color:var(--muted);margin:0;font-weight:700}
+.src ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.src li{display:flex;gap:8px;align-items:baseline}
+.tag{flex:none;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.tag.v{background:color-mix(in srgb,var(--move) 16%,transparent);color:var(--move)}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.en{direction:ltr;unicode-bidi:isolate}
+footer{margin-top:26px;color:var(--muted);font-size:.88rem;max-width:76ch}
+/* figure strokes */
+.fig{fill:none;stroke:var(--figure);stroke-linecap:round;stroke-linejoin:round}
+.fig .t{stroke-width:11}.fig .l{stroke-width:7}
+.fig circle{fill:var(--figure);stroke:none}
+.ghost{fill:none;stroke:var(--ghost);stroke-width:5;stroke-dasharray:3 7;stroke-linecap:round;stroke-linejoin:round}
+.ghost circle{fill:none;stroke:var(--ghost);stroke-width:3;stroke-dasharray:3 4}
+.floor{stroke:var(--floor);stroke-width:3}
+.mv{fill:none;stroke:var(--move);stroke-width:3.5;stroke-linecap:round}
+.mvh{fill:var(--move)}
+.lbl{fill:var(--move);font:600 13px var(--body);text-anchor:middle}
+@media (prefers-reduced-motion:no-preference){.mv{stroke-dasharray:6 0}}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>תוכנית תרגילי הגב</h1>
+  <p class="lede">שישה תרגילים מדף התרגילים האישי (עמוד 1), בשרטוט מחודש ובניסוח ברור יותר. בכל תרגיל: מה עושים, כמה (את המספרים ממלאים לפי הנחיית הפיזיותרפיסטית), וסרטון וטקסט להשוואה.</p>
+  <p class="note"><strong>חשוב:</strong> בדף המקורי השדות של שניות וחזרות נשארו ריקים. אפשר למלא אותם כאן לפי מה שנאמר בטיפול; המספרים נשמרים בדפדפן הזה בלבד. אם תרגיל מגביר כאב או גורם לכאב שמקרין לרגל, הפסק ושאל את הפיזיותרפיסטית.</p>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="mvh" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+</svg>
+
+<main class="grid">
+
+<!-- 1 -->
+<article class="card" id="ex1">
+  <div class="head"><span class="num">1</span><h2>הרמת החזה על האמות</h2><span class="alias">Prone on elbows · Sphinx</span></div>
+  <figure>
+    <svg viewBox="0 0 320 170" role="img" aria-label="שכיבה על הבטן, החזה מורם, האמות על הרצפה והמרפקים מתחת לכתפיים">
+      <line class="floor" x1="10" y1="148" x2="310" y2="148"/>
+      <g class="ghost"><path d="M60 142 L240 140"/><circle cx="262" cy="136" r="11"/></g>
+      <g class="fig">
+        <path class="l" d="M28 142 L150 140"/><path class="l" d="M28 142 L22 132"/>
+        <path class="t" d="M150 140 Q200 132 228 104"/>
+        <circle cx="252" cy="82" r="13"/>
+        <path class="l" d="M228 104 L226 142 L282 143"/>
+      </g>
+      <path class="mv" d="M268 130 Q284 112 270 94" marker-end="url(#ah)"/>
+      <text class="lbl" x="110" y="126">אגן צמוד לרצפה</text>
+    </svg>
+    <div class="fig-key"><span><i class="sw"></i>תנוחת התרגיל</span><span><i class="sw g"></i>תנוחת המוצא</span><span><i class="sw m"></i>כיוון התנועה</span></div>
+  </figure>
+  <ol>
+    <li>שכב על הבטן, המרפקים מתחת לכתפיים והאמות על הרצפה.</li>
+    <li>הנח לאגן ולבטן לשקוע לרצפה, כך שהגב התחתון מתקשת.</li>
+    <li>הרם את הגב העליון והחזה, כשהאמות נשארות על הרצפה.</li>
+    <li>החזק, ורד לאט לשכיבה מלאה.</li>
+  </ol>
+  <div class="dose"><label for="ex1-hold">החזק <input id="ex1-hold" type="number" min="0" inputmode="numeric"> שניות</label><label for="ex1-reps">חזור <input id="ex1-reps" type="number" min="0" inputmode="numeric"> פעמים</label></div>
+  <p class="tip"><b>שים לב:</b> הישבן והרגליים רפויים; העבודה נעשית בהתקשתות של הגב, לא בדחיפה של השרירים.</p>
+  <div class="src"><h3>מקורות</h3><ul>
+    <li><span class="tag v">סרטון</span><a href="https://www.maccabi4u.co.il/maccabi_circles/exercise/improving_posture/" target="_blank" rel="noopener">מכבי – תרגיל יישור הגב לאחור בשכיבה על הבטן</a></li>
+    <li><span class="tag v">סרטון</span><a href="https://youtu.be/GJ2DuGVWwAA" target="_blank" rel="noopener">אותו תרגיל של מכבי ביוטיוב (באנגלית)</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://guysandstthomas.nhs.uk/health-information/low-back-pain/physiotherapy-and-exercises" target="_blank" rel="noopener">Guy's and St Thomas' NHS – Back extensions</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://sportsrehab.ucsf.edu/sites/g/files/tkssra10961/files/doc/McKenzie_Back_Program_Nov2025.pdf" target="_blank" rel="noopener">UCSF – McKenzie Back Program (PDF)</a></li>
+  </ul></div>
+</article>
+
+<!-- 2 -->
+<article class="card" id="ex2">
+  <div class="head"><span class="num">2</span><h2>מעמידת זחילה: ישבן לעקבים</h2><span class="alias">Child's pose · Bottom to heels</span></div>
+  <figure>
+    <svg viewBox="0 0 320 170" role="img" aria-label="מעמידת זחילה, הידיים נשלחות קדימה והישבן נדחף לאחור אל העקבים, החזה לכיוון הרצפה">
+      <line class="floor" x1="10" y1="148" x2="310" y2="148"/>
+      <g class="ghost"><path d="M60 146 L118 146 L118 92 L206 92 L206 146"/><circle cx="226" cy="84" r="11"/></g>
+      <g class="fig">
+        <path class="l" d="M50 144 L118 144"/>
+        <path class="l" d="M118 144 L70 112"/>
+        <path class="t" d="M70 112 Q120 104 172 122"/>
+        <circle cx="194" cy="130" r="12"/>
+        <path class="l" d="M172 122 L232 140 L286 143"/>
+      </g>
+      <path class="mv" d="M108 92 Q86 92 74 100" marker-end="url(#ah)"/>
+      <path class="mv" d="M234 128 L292 130" marker-end="url(#ah)"/>
+      <text class="lbl" x="262" y="112">ידיים קדימה</text>
+      <text class="lbl" x="58" y="84">ישבן לאחור</text>
+    </svg>
+    <div class="fig-key"><span><i class="sw"></i>תנוחת התרגיל</span><span><i class="sw g"></i>עמידת זחילה (מוצא)</span><span><i class="sw m"></i>כיוון התנועה</span></div>
+  </figure>
+  <ol>
+    <li>עמוד בעמידת זחילה: ברכיים מתחת לאגן, ידיים מתחת לכתפיים.</li>
+    <li>החלק את הידיים קדימה על הרצפה, רחוק ככל האפשר.</li>
+    <li>דחוף את הישבן לאחור ולמטה לכיוון העקבים, והורד את החזה לכיוון הרצפה.</li>
+    <li>נשוף אוויר בזמן התנועה, וחזור לאט לעמידת הזחילה.</li>
+  </ol>
+  <div class="dose"><label for="ex2-reps">חזור <input id="ex2-reps" type="number" min="0" inputmode="numeric"> פעמים</label></div>
+  <p class="tip"><b>שים לב:</b> הראש רפוי בין הזרועות; יורדים רק עד שמרגישים מתיחה נעימה בגב.</p>
+  <div class="src"><h3>מקורות</h3><ul>
+    <li><span class="tag v">סרטון</span><a class="en" href="https://www.physitrack.com/exercise-library/how-to-perform-the-childs-pose-exercise" target="_blank" rel="noopener">Physitrack – Child's pose (guide and video)</a></li>
+    <li><span class="tag v">סרטון</span><a class="en" href="https://www.youtube.com/watch?v=Vk-kDE7UMOQ" target="_blank" rel="noopener">Guy's and St Thomas' – Be active with back pain</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://guysandstthomas.nhs.uk/health-information/low-back-pain/physiotherapy-and-exercises" target="_blank" rel="noopener">Guy's and St Thomas' NHS – Bottom to heels stretch</a></li>
+  </ul></div>
+</article>
+
+<!-- 3 -->
+<article class="card" id="ex3">
+  <div class="head"><span class="num">3</span><h2>הרמת רגל ישרה</h2><span class="alias">Straight leg raise</span></div>
+  <figure>
+    <svg viewBox="0 0 320 170" role="img" aria-label="שכיבה על הגב, רגל אחת ישרה מורמת מעט מעל המיטה, הרגל השנייה על המיטה">
+      <line class="floor" x1="10" y1="148" x2="310" y2="148"/>
+      <g class="ghost"><path d="M150 140 L36 142"/></g>
+      <g class="fig">
+        <circle cx="284" cy="128" r="13"/>
+        <path class="t" d="M262 136 L150 140"/>
+        <path class="l" d="M150 140 L40 143 L36 132"/>
+        <path class="l" d="M150 140 L50 104 L44 94"/>
+        <path class="l" d="M248 138 L196 143"/>
+      </g>
+      <path class="mv" d="M30 138 L30 106" marker-end="url(#ah)" marker-start="url(#ah)"/>
+      <text class="lbl" x="44" y="76">גובה __ ס״מ</text>
+      <text class="lbl" x="118" y="98">ברך ישרה</text>
+    </svg>
+    <div class="fig-key"><span><i class="sw"></i>הרגל מורמת</span><span><i class="sw g"></i>הרגל על המיטה (מוצא)</span><span><i class="sw m"></i>גובה ההרמה</span></div>
+  </figure>
+  <ol>
+    <li>שכב על הגב.</li>
+    <li>כווץ את שרירי הירך הקדמיים ויישר לגמרי את הברך.</li>
+    <li>הרם את הרגל הישרה לגובה שנקבע לך מעל המיטה.</li>
+    <li>החזק, והורד לאט.</li>
+  </ol>
+  <div class="dose"><label for="ex3-cm">הרם <input id="ex3-cm" type="number" min="0" inputmode="numeric"> ס״מ</label><label for="ex3-hold">החזק <input id="ex3-hold" type="number" min="0" inputmode="numeric"> שניות</label><label for="ex3-reps">חזור <input id="ex3-reps" type="number" min="0" inputmode="numeric"> פעמים</label></div>
+  <p class="tip"><b>שים לב:</b> בדף המקורי שתי הרגליים ישרות. במדריכים רבים הברך של הרגל השנייה כפופה וכף הרגל על המיטה, כדי להקל על הגב; כדאי לשאול את הפיזיותרפיסטית איזו גרסה מתאימה לך.</p>
+  <div class="src"><h3>מקורות</h3><ul>
+    <li><span class="tag v">סרטון</span><a class="en" href="https://uofmhealth.org/health-library/acd9466" target="_blank" rel="noopener">Michigan Medicine – How to Do Straight-Leg Raises</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://www.physitrack.com/exercise-library/how-to-perform-the-straight-leg-raise-exercise" target="_blank" rel="noopener">Physitrack – Straight leg raise</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://www.hingehealth.com/gb/en/resources/articles/straight-leg-raise/" target="_blank" rel="noopener">Hinge Health – Straight leg raise guide</a></li>
+  </ul></div>
+</article>
+
+<!-- 4 -->
+<article class="card" id="ex4">
+  <div class="head"><span class="num">4</span><h2>גשר</h2><span class="alias">Bridge</span></div>
+  <figure>
+    <svg viewBox="0 0 320 170" role="img" aria-label="שכיבה על הגב, ברכיים כפופות וכפות רגליים על הרצפה, האגן מורם">
+      <line class="floor" x1="10" y1="148" x2="310" y2="148"/>
+      <g class="ghost"><path d="M258 138 L165 140 L112 94 L88 144"/></g>
+      <g class="fig">
+        <circle cx="282" cy="130" r="13"/>
+        <path class="t" d="M258 138 Q210 116 165 90"/>
+        <path class="l" d="M165 90 L112 72 L88 144 L74 144"/>
+        <path class="l" d="M250 140 L186 144"/>
+      </g>
+      <path class="mv" d="M170 132 L170 104" marker-end="url(#ah)"/>
+      <text class="lbl" x="222" y="74">חוליה אחר חוליה</text>
+    </svg>
+    <div class="fig-key"><span><i class="sw"></i>האגן מורם</span><span><i class="sw g"></i>תנוחת המוצא</span><span><i class="sw m"></i>כיוון התנועה</span></div>
+  </figure>
+  <ol>
+    <li>שכב על הגב, ברכיים כפופות וכפות הרגליים על הרצפה.</li>
+    <li>הרם את האגן ואת הגב התחתון בהדרגה, חוליה אחר חוליה מהרצפה.</li>
+    <li>החזק במצב הזה.</li>
+    <li>רד לאט, חוליה אחר חוליה, וחזור לתנוחת המוצא.</li>
+  </ol>
+  <div class="dose"><label for="ex4-hold">החזק <input id="ex4-hold" type="number" min="0" inputmode="numeric"> שניות</label><label for="ex4-reps">חזור <input id="ex4-reps" type="number" min="0" inputmode="numeric"> פעמים</label></div>
+  <p class="tip"><b>שים לב:</b> עולים עד שהכתפיים, האגן והברכיים בקו אחד, בלי להקשית את הגב מעבר לכך.</p>
+  <div class="src"><h3>מקורות</h3><ul>
+    <li><span class="tag v">סרטון</span><a class="en" href="https://nuh.nhs.uk/exercise-videos-spine-school" target="_blank" rel="noopener">Nottingham University Hospitals NHS – Spine School: Bridge</a></li>
+    <li><span class="tag v">סרטון</span><a href="https://www.maccabi4u.co.il/maccabi_circles/exercise/improving_posture/pelvic_lift/" target="_blank" rel="noopener">מכבי – תרגיל הרמת אגן</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://www.cuh.nhs.uk/patient-information/back-mobility-exercises/" target="_blank" rel="noopener">Cambridge University Hospitals – Bridging</a></li>
+  </ul></div>
+</article>
+
+<!-- 5 -->
+<article class="card" id="ex5">
+  <div class="head"><span class="num">5</span><h2>ברך אחת לחזה</h2><span class="alias">Single knee to chest</span></div>
+  <figure>
+    <svg viewBox="0 0 320 170" role="img" aria-label="שכיבה על הגב, ברך אחת נמשכת בידיים אל החזה, הרגל השנייה כפופה וכף הרגל על הרצפה">
+      <line class="floor" x1="10" y1="148" x2="310" y2="148"/>
+      <g class="ghost"><path d="M160 140 L112 98 L84 144"/></g>
+      <g class="fig">
+        <circle cx="284" cy="128" r="13"/>
+        <path class="t" d="M262 136 L160 140"/>
+        <path class="l" d="M160 140 L108 98 L80 144 L66 144"/>
+        <path class="l" d="M160 140 L200 82 L158 70 L150 60"/>
+        <path class="l" d="M250 132 L214 100 L196 92"/>
+      </g>
+      <path class="mv" d="M118 76 Q150 46 186 60" marker-end="url(#ah)"/>
+      <text class="lbl" x="256" y="70">אחיזה מאחורי הברך</text>
+    </svg>
+    <div class="fig-key"><span><i class="sw"></i>הברך אל החזה</span><span><i class="sw g"></i>תנוחת המוצא</span><span><i class="sw m"></i>כיוון התנועה</span></div>
+  </figure>
+  <ol>
+    <li>שכב על הגב, ברכיים כפופות וכפות רגליים על הרצפה.</li>
+    <li>הרם ברך אחת לכיוון החזה.</li>
+    <li>אחוז בשתי הידיים מאחורי הברך ומשוך אותה עד החזה.</li>
+    <li>החזק, והחזר לאט את כף הרגל לרצפה. החלף רגל.</li>
+  </ol>
+  <div class="dose"><label for="ex5-hold">החזק <input id="ex5-hold" type="number" min="0" inputmode="numeric"> שניות</label><label for="ex5-reps">חזור <input id="ex5-reps" type="number" min="0" inputmode="numeric"> פעמים</label></div>
+  <p class="tip"><b>שים לב:</b> אוחזים מאחורי הברך (בירך), לא על השוק, כדי לא ללחוץ על מפרק הברך.</p>
+  <div class="src"><h3>מקורות</h3><ul>
+    <li><span class="tag v">סרטון</span><a href="https://www.maccabi4u.co.il/maccabi_circles/exercise/improving_posture/bending_legs/" target="_blank" rel="noopener">מכבי – תרגיל כיפוף ברכיים בשכיבה על הגב</a></li>
+    <li><span class="tag v">סרטון</span><a class="en" href="https://nuh.nhs.uk/exercise-videos-spine-school" target="_blank" rel="noopener">Nottingham University Hospitals NHS – Single Knee Hugs</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://www.csp.org.uk/conditions/back-pain/video-exercises-back-pain" target="_blank" rel="noopener">Chartered Society of Physiotherapy – Knee to chest</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://guysandstthomas.nhs.uk/health-information/low-back-pain/physiotherapy-and-exercises" target="_blank" rel="noopener">Guy's and St Thomas' NHS – Knee hugs</a></li>
+  </ul></div>
+</article>
+
+<!-- 6 -->
+<article class="card" id="ex6">
+  <div class="head"><span class="num">6</span><h2>גלגול ברכיים מצד לצד</h2><span class="alias">Knee rolls · Lower trunk rotation</span></div>
+  <figure>
+    <svg viewBox="0 0 320 178" role="img" aria-label="מבט מלמעלה: שכיבה על הגב, הזרועות לצדדים, הברכיים הכפופות מגולגלות לצד אחד, ובקו מקווקו לצד השני">
+      <g class="ghost"><path d="M174 104 L104 116 L142 150"/><path d="M148 104 L92 130 L128 160"/></g>
+      <g class="fig">
+        <circle cx="161" cy="26" r="14"/>
+        <path class="t" d="M161 48 L161 100"/>
+        <path class="l" d="M128 54 L194 54"/>
+        <path class="l" d="M128 54 L56 62"/><path class="l" d="M194 54 L266 62"/>
+        <path class="l" d="M148 104 L218 116 L180 150"/>
+        <path class="l" d="M174 104 L230 130 L194 160"/>
+      </g>
+      <path class="mv" d="M96 146 Q160 182 228 146" marker-end="url(#ah)" marker-start="url(#ah)"/>
+      <text class="lbl" x="262" y="100">לאט</text>
+      <text class="lbl" x="80" y="40">כתפיים על הרצפה</text>
+    </svg>
+    <div class="fig-key"><span><i class="sw"></i>הברכיים לצד אחד</span><span><i class="sw g"></i>לצד השני</span><span><i class="sw m"></i>תנועה הלוך ושוב</span></div>
+  </figure>
+  <ol>
+    <li>שכב על הגב, הזרועות ישרות לצדדים והברכיים כפופות ומכוונות לתקרה.</li>
+    <li>גלגל באיטיות את שתי הרגליים יחד לצד אחד.</li>
+    <li>חזור למרכז, וגלגל לצד השני, בלי שהרגליים יגעו ברצפה.</li>
+  </ol>
+  <div class="dose"><label for="ex6-reps">חזור <input id="ex6-reps" type="number" min="0" inputmode="numeric"> פעמים</label></div>
+  <p class="tip"><b>שים לב:</b> הכתפיים נשארות צמודות לרצפה; התנועה מגיעה מהאגן ומהגב התחתון. בגרסה קלה יותר כפות הרגליים נשארות על הרצפה.</p>
+  <div class="src"><h3>מקורות</h3><ul>
+    <li><span class="tag v">סרטון</span><a class="en" href="https://nuh.nhs.uk/exercise-videos-spine-school" target="_blank" rel="noopener">Nottingham University Hospitals NHS – Lumbar Rotation</a></li>
+    <li><span class="tag v">סרטון</span><a class="en" href="https://library.theprehabguys.com/vimeo-video/lower-trunk-rotation-2" target="_blank" rel="noopener">The Prehab Guys – Lower Trunk Rotation</a></li>
+    <li><span class="tag v">סרטון</span><a href="https://www.maccabi4u.co.il/maccabi_circles/exercise/improving_posture/bending_legs/" target="_blank" rel="noopener">מכבי – כיפוף ברכיים בשכיבה (המשך: הטיית הברכיים לצדדים)</a></li>
+    <li><span class="tag">טקסט</span><a class="en" href="https://guysandstthomas.nhs.uk/health-information/low-back-pain/physiotherapy-and-exercises" target="_blank" rel="noopener">Guy's and St Thomas' NHS – Knee rolls</a></li>
+  </ul></div>
+</article>
+
+</main>
+
+<footer>הדף מבוסס על עמוד 1 מתוך 2 של תוכנית התרגילים האישית (לאומית, 8/10/2026), ואינו מחליף את הנחיות הפיזיותרפיסטית. המקורות מציגים את אותם תרגילים כפי שהם מופיעים באתרי קופות חולים ובתי חולים; ייתכנו הבדלים קטנים בביצוע.</footer>
+</div>
+
+<script>
+(function(){
+  var KEY='back-ex-doses';
+  var data={};
+  try{data=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){data={};}
+  document.querySelectorAll('.dose input').forEach(function(inp){
+    if(data[inp.id]!=null) inp.value=data[inp.id];
+    inp.addEventListener('input',function(){
+      data[inp.id]=inp.value;
+      try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}
+    });
+  });
+})();
+</script>
+
+</body></html>
